@@ -1,0 +1,84 @@
+[*] Methodology:
+
+	-start a new Burp project
+	-burp scan
+	-nikto
+	-wafw00f
+	-wpscan (if wordpress)
+
+	(-sslcan / ssl labs / testssl.sh)
+	-dirbuster (or dirb)
+	-burp intruder (github list bruteforce) (with authentication cookie)
+		
+	-test manually the app
+	-sqlmap
+	-check js client code 
+
+[*] Links:
+	
+	- Check CSP: https://csp-evaluator.withgoogle.com/
+
+[*] WebDAV:
+	-> make request with OPTIONS header in Burp
+		-> if the response gives a lot of methods there is probably WebDAV enabled
+	-> use: cadaver (a WebDAV client on Kali Linux)
+		-> cadaver http://xxxxx.com
+	-> use: davtest
+
+
+[*] HTTP Verb to test:
+	COPY, DELETE, GET, HEAD, LOCK, MOVE, OPTIONS, POST, PROPFIND, PROPPATCH, PUT, REPORT, UNLOCK, TRACE
+
+
+[*] Pentest externe:
+
+	-> Changer le user agent de dirbuster (si ca ne passe pas)
+
+	-> créer un dictionnaire personnalisé: tools Crunch
+
+[*] Méthodo:
+
+	-Identifier les points d'injection
+	-Vérifier la présence d'un WAF
+	-Scan nmap
+	-Tomcat: lfi des fichiers de confs du server
+	-Exposition du tomcat manager: /manager/html
+	-Avec un compte client:
+		-tester le cloisonnement horizontal, vertical
+		-tester l'upload: peut on uploader n'importe quoi, où c'est stocké, 
+
+
+[*] Notes sublimetext: utiliser alt+F3 pour modifier tout un pattern
+
+
+[*] dotdotpwn
+	-> testing the path traversal
+	-> dotdotpwn.pl -m http -h 192.168.1.1 -M GET
+
+	
+[*] XSSHunter
+
+[*] tplmap.py
+	-> testing the Server Side template injection
+
+[*] commix
+	-> testing the command injection
+
+
+[*] AngularJS
+
+[*] Xampp
+	-> folder and webpages are accessible in the folder htdocs/
+
+[*] Waf Bypass:
+	-> use censys.io to retrieve original ip from a website
+
+
+[*] Burp Suite:
+	-> Extensions: Additional CSRF Checks, Bypass WAF, Heartbleed, JSON Beautifier, JSON Web Tokens, JOSEPH, Kerberos Authentication, psychoPATH, SAML Raider Certificates, Wsdler, Session Auth, AWS Security Checks, Auto-Repeater, Authorize
+
+	-> Update CRSF tokens with Macros: https://portswigger.net/support/using-burp-suites-session-handling-rules-with-anti-csrf-tokens
+
+[*] jwtcat.py:
+	-> Crack a jwt token:
+		-> python3 jwtcat.py -t [1st_part_token].[2nd_part_token] -w /usr/share/wordlists/rockyou.txt 

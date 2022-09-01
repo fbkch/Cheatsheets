@@ -1,0 +1,88 @@
+[*] Generic approach:
+
+	- nessus
+	- udp tcp ip nmap scans (all protocols -F)
+	- sslscan, testssl
+	- nikto
+	- dirbuster
+	- hydra ? (ssh, web apps, ftp)
+	- reco shodan
+	- dns recon: dnsrecon -d xxxxxxx.com -D /usr/share/wordlists/dnsmap.txt -t std 
+	- dnsrecursion: nmap -sU -p53 -sC -sV xxxxxxxxxx.com --script dns-recursion
+
+
+[*] LLMNR Poisoning
+
+	- https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html
+
+
+[*] NTLMv2 Cracking (with Hashcat)
+
+
+[*] Bloodhound
+
+	- https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-with-bloodhound-on-kali-linux
+
+
+[*] NTLM Relay
+
+
+
+[*] Token Impersonation
+
+
+
+[*] Pass the Hash
+
+
+
+[*] PsExec & Crackmapexec
+
+	- https://ptestmethod.readthedocs.io/en/latest/LFF-IPS-P3-Exploitation.html
+
+	- https://ptestmethod.readthedocs.io/en/latest/cme.html
+
+	- https://www.ivoidwarranties.tech/posts/pentesting-tuts/cme/crackmapexec/
+
+	- Connect to share:
+		-> rpcclient 10.x.x.x -U domainName/userName
+
+	- Nmap scan up hosts:
+		-> nmap -n -sn 192.168.x.x/24 -oG - | awk '/Up$/{print $2}'
+
+
+
+[*] MS17-010
+
+
+
+[*] GPP/cPasswords
+
+
+
+[*] Kerberoasting
+
+	- https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/t1208-kerberoasting
+
+	- https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+
+	- https://social.technet.microsoft.com/wiki/contents/articles/717.service-principal-names-spn-setspn-syntax.aspx
+
+	- https://www.youtube.com/watch?v=xH5T9-m9QXw
+
+	- Get User SPNs:
+		-> impacket-GetUserSPNs -dc-ip 10.X.X.X DomainName/Username:Password
+
+	- Check time and synchronize with the DC:
+		-> net time -S DC_IP_adress  (check)
+		-> net time set -S DC_IP_adress
+
+
+[*] Windows Priv Esc
+
+	- https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/seatbelt
+
+	- Query MS-SQL server:
+		-> sqlcmd.exe -E -S Username\SQLEXPRESS -Q "select @@version"
+
+

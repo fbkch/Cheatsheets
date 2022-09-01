@@ -1,0 +1,44 @@
+[*] Nmap:
+
+	-> To get the services version (if there is a WAF blocking)
+		-> nmap --script banner 10.10.10.10 -v 
+
+	-> to run automatically the basic scripts for the corresponding service version
+		-> nmap -sC 10.10.10.10 -v
+
+	-> LDAP search nse scripts (maybe to modify):
+		nmap -p 389 --script ldap-search -script-args 'ldap.username="CN=Administrator,CN=Users,DC=adlab,DC=pwnable", ldap.password="AdminPasswordHere", ldap.qfilter=computers' 10.10.10.10
+
+		nmap -p 389 –script ldap-search –script-args ‘ldap.username=”cn=ldaptest,cn=users,dc=cqure,dc=net”,ldap.password=ldaptest,ldap.qfilter=users,ldap.attrib=sAMAccountName’ 10.10.10.10
+
+[*] Nikto: 
+
+	export in html format -> nikto -h http://example.com -output ~/nikto.html -Format htm
+
+[*] CeWL:
+
+	Create automatically a wordlist by scanning a website with CeWL -> cewl [options] www.example.com
+
+[*] Sslyze:
+
+	-> sslyze --regular www.example.com
+
+
+[*] IKE-Scan:
+
+	-> ike-scan 192.168.x.x -M
+
+
+[*] Google Dorks:
+	
+	search only one [url]	->	site: [url]
+	search within a number range	->	numrange:[#]...[#]
+	search within past [#] months	->	date:[ #]
+	find pages that link to [url]	->	link: [url]
+	find pages related to [url]		->	related: [url]
+	find pages with [string] in title	->	intitle: [string]
+	find pages with [string] in url		->	inurl: [xls]
+	find phone book listings of [name]		->	phonebook: [name]
+
+
+

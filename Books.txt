@@ -1,0 +1,34 @@
+[*] IT security
+
+ - Gray Hat Hacking 5th edition:
+ 	 -> https://www.amazon.com/Gray-Hat-Hacking-Ethical-Handbook/dp/1260108414
+
+ - How to own a continent:
+ 	 -> https://www.amazon.com/Stealing-Network-How-Own-Continent/dp/1931836051
+
+ - Powershell pentest:
+	 -> https://www.amazon.com/Hands-Penetration-Testing-Windows-PowerShell-ebook/dp/B071HQQ335
+
+ - Web hacking 101:
+ 	 -> https://leanpub.com/web-hacking-101
+
+ - The Tangled Web:
+ 	 -> https://www.amazon.com/Tangled-Web-Securing-Modern-Applications-ebook/dp/B006FZ3UNI/ref=as_li_ss_tl?ie=UTF8&qid=1476406633&sr=8-4&keywords=Tangled+Web+book&linkCode=sl1&tag=bugcrowd-20&linkId=16affce50f57b259127634c91d98897e
+
+ - The Web Application Hacker's Handbook:
+ 	 -> https://www.amazon.com/gp/product/1118026470/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1118026470&linkCode=as2&tag=bugcrowd-20&linkId=9f9c5e3f51e50ea7092a21a04aec184f/
+
+ - Hacker playbook 2:
+ 	 -> https://www.amazon.com/gp/product/1512214566/ref=as_li_tl?ie=UTF8&tag=bugcrowd-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1512214566&linkId=5d1e5f75a374daac6de37135843916b1
+
+ - The Mobile Application Hacker's Handbook:
+ 	 -> https://www.amazon.com/gp/product/1118958500/ref=as_li_tl?ie=UTF8&tag=bugcrowd-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1118958500&linkId=249a44a5688c8aadc866e9a61cfcd34f
+
+
+[*] Blockchain
+
+ - Mastering Bitcoin:
+ 	-> https://www.amazon.de/Mastering-Bitcoin-Unlocking-Digital-Cryptocurrencies/dp/1449374042
+
+ - Mastering Ethereum:
+ 	-> https://www.amazon.de/gp/product/B07KGLNL76/ref=dbs_a_def_rwt_bibl_vppi_i0
