@@ -1,0 +1,109 @@
+[*] Methodology:
+
+	-> owasp: https://owasp.org/www-pdf-archive/Thick_Client_%28In%29Security_-_Neelay_S_Shah_-_Mar_24.pdf
+	-> cyberark: https://www.cyberark.com/resources/threat-research-blog/thick-client-penetration-testing-methodology
+
+
+[*] Tools:
+
+	- semgrep (C++): https://github.com/returntocorp/semgrep
+	- Spartacus (DLL hijacking): https://github.com/Accenture/Spartacus
+
+[*] Checks:
+	
+	- check directories permissions
+
+
+[*] Reverse Engineering
+
+	Tutorial for the tools:
+	-> https://www.youtube.com/watch?v=3NTXFUxcKPc
+
+
+	Malware Analysis:
+	-> https://resources.infosecinstitute.com/complete-tour-of-pe-and-elf-part-1/#gref
+	-> http://www.certego.net/en/news/malware-tales-gootkit/
+
+	Backdooring a PE and evading AV:
+	-> https://haiderm.com/fully-undetectable-backdooring-pe-file/
+
+
+
+	GDB Commands:
+		-> gdb ./myfile -q
+		-> (gdb) disassemble main
+		-> (gdb) set disassembly-flavor intel
+		-> (gdb) disassemble main
+		-> (gdb) break *main			=> set a breakpoint at the start of main
+		-> (gdb) run
+		-> (gdb) info registers
+		-> (gdb) si					=> go to the next instruction
+		-> (gdb) ni					=> go to the next instruction (without function call?)
+		-> Press Enter to repeat the cmd
+		-> (gdb) break *0x0000006633 	=> set a breakpoint at the address 0x0000006633
+		-> (gdb) run myargument			=> run the program with the argument "myargument"
+		-> (gdb) continue
+		-> (gdb) set $eax=0				=> set the eax register to 0
+
+		-> (gdb) x/s 0x4006da			=> print the content of the address 0x4006da
+		-> (gdb) shell echo 0x65617379 | xxd -r;echo  			=> convert hex value to ASCII
+
+		-> (gdb) x/32x $esp 	=> 	examine $esp and print 32 double-words in hexadecimal format
+		-> (gdb) x/s 0xbffffc60 + 12 	=>	print the content of the address at the offset + 12
+		-> (gdb) info address myvar		=>	print the address of teh variable myvar
+		-> (gdb) x/x $esp + 92			=> print the content of $esp with an offset of + 92
+		-> (gdb) p 0xbffffcac - 0xbffffc6c		=>	calculate the number of bytes (example of byte: 0x45) between the two addresses
+
+		-> (gdb) find 0xb7e97000, +9999999, "/bin/sh"		=>	search the address of /bin/sh in this range of addresses (libc.so)
+		-> (gdb) strings -a -t x /lib/libc-2.11.2.so | grep "/bin/sh" 	=>	find the offset of /bin/sh 
+
+
+
+	Analyse a file:
+		-> file myfile
+		-> hexdump -C myfile
+		-> strings myfile
+		-> objdump -d myfile		=> disassemble the program
+		-> objdump -x myfile | less 	=> print headers
+		-> strace myfile		=> run the file and print the syscalls (trace the functions)
+		-> ltrace myfile 		=> run the file and trace the library functions
+
+
+
+	Radare2:
+		-> r2 myfile			=> open myfile with radare2
+		-> aaa   	=> analyse functions
+		-> afl		=> print all functions found
+		-> ?			=> help
+		-> s sym.main		=> change the location (here to main)	(use tab to autocomplete)
+		-> pdf				=> print disassembly code
+		-> VV 				=> visual mode (we can see the different blocks) (shift + tab to select a block, P to change the view)
+		-> r2 -d myfile			=> dynamical analysis
+		-> db 0x00099			=> set a breakpoint at 0x00099	(then go to VV, use : like in VIM, dc to run the program, shift + S to step further)
+		=> RIP is the instruction pointer (where the program is currently reading)
+
+		-> ood Test_Licence_Key				=> open program in debug mode with an argument
+		-> dc 								=> run
+		-> dr 								=> see the value of registers
+		-> dr rip=0x0044443				=> set the value of rip to 0x0044443
+		=> VV mode with :
+			-> afvn var1 myvar			=> rename variable var1 to myvar
+		-> V!		=> switch to another visual mode
+
+
+
+	Parser Differential:
+		=> block dissasembly on gdb and radare2
+		-> https://www.sentinelone.com/blog/breaking-and-evading/
+
+
+	Check the Endianness on Linux:
+		-> lscpu
+
+	Check the architecture:
+		-> uname -a 	->  if i686 => 32 bits
+
+
+		
+	Extract file with binwalk:
+		-> binwalk rootfs.ubifs -e -M

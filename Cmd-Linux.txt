@@ -106,6 +106,15 @@ Find a directory	->	find / -type d -name 'myfolder'
 
 Decode zip encoded text		->	echo -n "H4sIAMvOiV4A/wVAIQ0AAAjLwh4Gi3gFBAIuqf9xtimk6i8M0yWJIw0AAAA=" | base64 -d | gunzip -c
 
+Mount folder in Kali Guest VMWare (in case of an error) 	->  sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
+
+Find string in all files recursively -> grep -r "texthere" .
+
+Add string before each line in a file  ->  awk '{print "abdce" $1}' list-of-files.txt > new_file
+
+
+Mount shared folder on linux guest VMWare  ->  sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
+
 
 
 
