@@ -46,7 +46,7 @@ current user -> echo %USERNAME%
 hosts in current Domain 		->	net view /domain
 hosts in [MYDOMAIN]				->	net view /domain:[MYDOMAIN]
 all users in current domain 	-> net user /domain
-add user 				-> net user <user> <pass> /add
+add user 			-> net user <user> <pass> /add
 add user to Administrators  ->  net localgroup "Administrators"	<user> /add
 domain password policy		->	net accounts /domain
 list local Administrators 	->	net localgroup "Administrators"

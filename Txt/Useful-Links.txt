@@ -119,7 +119,7 @@ Quick reverse shell generator 	-> 	https://www.revshells.com/
 
 Phishing Login Credentials (2FA bypass) -> https://github.com/kgretzky/evilginx2
 
-
+Windows cmd easily -> https://wadcoms.github.io/#
 
 
 
