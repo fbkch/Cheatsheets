@@ -1,0 +1,479 @@
+Reverse the apk:
+	-> d2j-dex2jar test.apk
+	-> use jd-gui to read the code
+	-> use IDA pro
+
+	-> unzip the .apk and check the folders and files
+
+	-> on Windows: use jdax-gui
+
+	-> (complete decompiling): ava -jar apktool_2.3.3.jar d <apk>
+
+	JADX:
+		-> https://github.com/skylot/jadx (download the zip release)
+
+		-> On Windows: jadx.bat myApp.apk
+		-> jdax-gui.bat
+
+	Apktool:
+	-> apktool d myapp.apk -o extractedFolder
+
+	Extract APK:
+		- https://www.alphr.com/extract-apk-android/
+
+Reverse .ipa file:
+	-> https://reverseengineering.stackexchange.com/questions/1594/possibilities-for-reverse-engineering-an-ipa-file-to-its-source	
+
+	-> locate the the bundle with objection:
+	https://www.virtuesecurity.com/kb/ios-frida-objection-pentesting-cheat-sheet/
+
+	-> extract bundle folder: /private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX
+
+	-> copy the entire extracted folder (XXXX.app) in a "Payload" named folder and zip it YourChoiceName.ipa
+		-> zip -r test.ipa Payload
+
+
+
+Dynamical Analyses:
+	-> Use Burp to intercept the requests on Android
+ 		https://support.portswigger.net/customer/portal/articles/1841101-configuring-an-android-device-to-work-with-burp
+
+	-> Android: https://support.portswigger.net/customer/portal/articles/1841102-Mobile%20Set-up_Android%20Device%20-%20Installing%20CA%20Certificate.html
+
+	-> iOS: https://portswigger.net/burp/documentation/desktop/mobile/config-ios-device
+		-> use Safari to download and install the cert from http://burp
+	
+
+Bypass SSL pinning:
+	-> Android: https://blog.netspi.com/four-ways-bypass-android-ssl-verification-certificate-pinning/
+			- Use objection method (technique 3)
+
+	   Configuring Burp Suite With Android Nougat:
+		-> https://blog.ropnop.com/configuring-burp-suite-with-android-nougat/
+
+		- Make sure Kali is in Bridge mode
+			- if the Bridge cannot be set (NAT only), perform port forwarding via SSH (and config proxy localhost 8080 on phone):
+				-> ssh -R 8080:localhost:8080 root@10.x.x.x -p 22
+
+				-> Magisk ssh restart: /sbin/.magisk/modules/ssh/opensshd.init restart
+
+	-> iOS: https://blog.netspi.com/four-ways-to-bypass-ios-ssl-verification-and-certificate-pinning/
+
+		-> objection --gadget "com.XXXXX" explore
+		-> ios sslpinning disable (install a self-signed cert before)
+
+		Using Burp's Invisible Proxy Settings to Test a Non-Proxy-Aware Thick Client Application:
+		-> https://portswigger.net/support/using-burp-suites-invisible-proxy-settings-to-test-a-non-proxy-aware-thick-client-application
+
+			Disable and flush mDNSResponder on iOS:
+				-> launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+				(to relaunch it) -> launchctl load -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+				-> killall -HUP mDNSResponder; killall -HUP mDNSResponderHelper
+
+	-> Bypass Flutter/Non-HTTP apps:
+		- https://github.com/Impact-I/reFlutter/
+		- https://github.com/summitt/Burp-Non-HTTP-Extension/wiki#basic-set-up-for-mobile-testing-testing-on-two-machines
+
+		Repackage and re-sign the apps:
+		- https://github.com/patrickfav/uber-apk-signer
+
+		- Reverse with Hopper disassembler:
+			-> https://infosecwriteups.com/bypass-freerasps-mobile-security-measures-in-flutter-8a6d4f192e0d
+
+
+
+Framework:
+	-> install frida-tools (https://www.frida.re/docs/installation/)
+
+	-> install frida server https://github.com/frida/frida/releases
+
+	-> iOS instrumentation: https://github.com/ChiChou/grapefruit
+
+Frida Framework:
+	Android (rooted):
+		-> adb shell getprop ro.product.cpu.abi 
+		-> download the correct Frida server: https://github.com/frida/frida/releases 
+		-> unxz file_name.xz
+		-> adb push frida-server-12.2.29-android-arm64 /data/local/tmp/ 
+		-> adb shell "chmod 755 /data/local/tmp/frida-server-12.2.29-android-arm64 " 
+		-> adb shell 
+		-> (on Device) su 
+		-> (on Device) /data/local/tmp/frida-server-12.2.29-android-arm64 & 
+		-> (on Kali) frida-ps -U
+
+	IoS (JailBroken):
+		-> (on Device through ssh) uname -a
+		-> download the correct frida server: https://github.com/frida/frida/releases 
+		-> (on Kali) scp frida-server-12.2.29-android-arm64 <username>@<ip>:<path to destination> 
+		-> (on Device )chmod 755 frida-server-12.2.29-android-arm64 
+		-> (on Device) ./frida-server-12.2.29-android-arm64 & 
+		-> (on Kali) frida-ps -U
+		-> (on Kali) frida-ps -Uai
+		-> (on Kali) python3 fridump.py -s -U NameOfApp
+
+MobSF Framework:
+	-> git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF
+	-> ./setup.sh && ./run.sh
+	-> access page: http://localhost:8000
+	-> for dynamical analysis use genymotion
+
+	=> use the docker image in case of versions bugs
+
+
+Using ADB:
+	-> adb devices (check the device)
+	-> adb install test.apk (install the .apk on the device)
+	-> adb shell	(execute cmd on the device) 
+	-> adb uninstall com.company.apppackage  (remove .apk)
+	-> adb install <path to apk> 	(install .apk on device)
+	-> adb push <myfile> <remote path> (push a file on the device)
+	-> adb pull <remote path> (get a file from the device)
+
+	-> adb reverse tcp:8082 tcp:8082 (forward traffic) + configure network proxy on the device to 127.0.0.1:8082
+
+	-List installed apps				=> adb shell cmd package list packages
+	-Simulate typing of text/characters => adb shell "input keyboard text 'ABC'"
+
+	- Get file from rooted phone:
+		-> adb -d shell "su -c cat /sbin/.magisk/mirror/data/data/xx.com.xxxapp.xxx/app_webview/Default/databases/file__0/1" > data_android.db
+
+	- On laptop screen mirroring phone:
+		-> scrcpy
+
+
+Android Patching APK:
+	
+	-> https://github.com/badadaf/apkpatcher
+
+	-> Ensure that apktool is version 2.7.0
+
+	-> Manual repackaging:
+		- https://fadeevab.com/frida-gadget-injection-on-android-no-root-2-methods/
+
+
+iOS Patching IPA (repackaging):
+	
+	-> on MacOS, create a 7-days signing certificate with Xcode (Accounts)
+
+	-> in Project options (Signing & Capabilities) choose the signing certificate
+
+	-> create and build a test project with Xcode (on the targeted device connected trust the profile) (lower the minimum iOS version supported: Project Options > General > Minimum Deployments > iOS)
+
+	-> check for the embedded.mobileprovision in /Users/myuser/Library/Developer/Xcode/DerivedData/myproject/Build/Products/Debug-abc/myproject.app
+
+	-> Verify the valid signing profiles:
+
+		- security find-identity -p codesigning -v
+
+	-> Generate the patched IPA (with objection and frida gadgets installed):
+
+		- objection patchipa --source myapp.ipa --codesign-signature ABC...
+
+	-> Install IPA on the phone: XCode > cmd+shift+2 > install on device
+
+
+
+
+
+On the Phone/iPad:
+	-> get the files concerning the application: grep -rnwi / -e "NameOfApp" > myfile
+
+Scan the App:
+	-> MobSF: https://github.com/MobSF/Mobile-Security-Framework-MobSF
+
+Android processor architecture:
+	-> ARM
+	-> Intel
+	-> MIPS
+
+Android:
+	-> check the stack smashing protection:
+		find . -name "*.so" -exec pwn checksec --file {} \;
+
+iOS default ssh password: alpine
+
+iOS DCIM directory	->	/private/var/mobile/Media/DCIM/
+
+iOS Application path	->		/var/containers/Bundle/Application/
+
+
+Dynamical Analysis link	-> https://medium.com/@ansjdnakjdnajkd/dynamic-analysis-of-ios-apps-wo-jailbreak-1481ab3020d8
+
+Mobile App Analysis Platform -> https://github.com/m0bilesecurity/RMS-Runtime-Mobile-Security
+
+Objection & Frida:
+	- Install it:
+		-> pip install frida-tools
+		-> pip install objection
+
+
+	- Listening remotely with frida-server (on phone, IP of the phone):
+		-> frida-server -l 0.0.0.0:19999 &
+
+	- Using Frida tools to get the PID of the target app:
+
+		-> frida-ps -ai -H 192.168.99.242:27043   (in case of remote frida server)
+		-> frida-ps -Uai      (in case of usb connected frida server)
+
+	- Connect to remote frida server with custom port (pid of app is 1983 here):
+		-> objection -N --host 192.168.99.242 --port 27043 -g 1983 explore
+
+		-> frida-ps -ai -H 192.168.99.242:19999   (in case of remote frida server)
+		-> frida-ps -Uai      (in case of usb connected frida server)
+
+	- Connect to remote frida server with custom port (pid of app is 1983 here):
+		-> objection -N --host 192.168.99.242 --port 19999 -g 1983 explore
+
+		/!\ in case of a timeout use the App Identifier (example: com.google.android.gm)
+			-> objection -N --host 192.168.99.242 --port 19999 -g com.google.android.gm explore
+
+	- Connect to local frida (phone connected via usb):
+		-> objection -g 1983 explore
+
+
+	- Import AES hook script with objection:
+
+		-> import aes-hook.js
+
+
+
+	- Objection dumping memory:
+		-> memory dump all dump.txt
+		-> string dump.txt > strings.txt 
+
+	- Objection runtime injection test:
+		-> ios ui alert "injection test"
+
+		Frida script example for injection:
+
+			Java.perform(function() {
+			var getAuthData_Activity = Java.use('o.getAuthData');
+			getAuthData_Activity.IconCompatParcelizer.overload('android.content.Context', 'int', 'java.lang.String').implementation = function(message){
+			return "Test injection";
+			};
+			});
+
+	- Frida run script:
+		-> frida -U myApp -l myscript.js --debug
+
+	- Frida trace application:
+		-> frida-trace -U --decorate -i "recv*" -i "send*" myApplication
+
+	- Frida docs:
+
+		-> https://learnfrida.info/java/
+
+
+	- Frida trace iOS:
+
+		log(Memory.readCString(args[4]));
+
+		log(ObjC.Object(args[7]));
+
+		var obj = ObjC.Object(args[7]);
+		log(obj.toString());
+
+		log(ObjC.Object(args[2]).toString()); 
+
+		args[6] = ObjC.classes.NSString.stringWithString_('jk-ishere.pdf');
+
+		-> cmd:
+			frida-trace -U -f "com.Example.app" -m "*[GDHttpRequest open*]" -m "*[GDHttpRequest sendData*]"
+
+		-> objection:
+			objection -g com.abc.abc explore -s "ios hooking watch method \"-[ThreatClass isJailbroken]\" --dump-args --dump-return --dump-backtrace"
+			
+
+	- Objection remove jailbreak detection on an app:
+		-> objection -g “<package_name>” explore --startup-command 'ios jailbreak disable' 
+		-> objection -N --host 192.168.99.242 --port 19999 -g ID_of_app explore --startup-command 'ios jailbreak disable' 
+
+
+Objection Inspect cache and DB:
+	- iOS:
+		-> cmd: env
+		-> get path to db
+		-> sqlite connect path_to_db
+		In the database:
+		-> .tables
+		-> select * from table_name
+
+
+Objection Hooking methods:
+	- Android:
+		-> android hooking get current_activity
+		-> android hooking watch class com.xxxx.android.activity.MainActivity
+
+	- iOS:
+		-> ios hooking list classes --ignore-native
+		-> ios hooking list class_methods <class_name>
+		-> ios hooking generate simple <class_name>
+
+
+
+Logs reading:
+	- Android:
+		-> use: adb logcat
+
+		-> adb logcat --pid=$(adb shell pidof -s com.xxxxx.yyyyy)
+		-> adb logcat --pid=12345
+
+	- iOS:
+		-> use itools on Windows
+		-> use oslog (install it from cydia on the device: http://cydia.saurik.com/package/net.limneos.oslog/)
+
+		on MacOS
+		-> idevice_id --list
+		-> idevicesyslog -u <device_ID> 
+
+
+Check availability of an app region-locked:
+	-> https://fnd.io/
+
+Tapjacking PoC:
+	-> https://github.com/geeksonsecurity/android-overlay-malware-example
+	-> https://apkpure.com/overlay-test/com.mebarin.overlaytest
+
+
+Manual:
+	-> https://github.com/OWASP/owasp-mstg
+	-> Objection commands documentation:
+		- https://github.com/sensepost/objection/tree/master/objection/console/helpfiles
+
+
+Jailbreak iOS 13:
+	- install uncover ipa in iCloud
+	- delete old altstore, uncover from the phone
+	- on laptop install: altserver, iCloud (not from Microsoft Store), iTunes
+	- when launching altstore input the good location folder, open iCloud, iTunes at the same time (create an Apple ID if needed)
+	- disable firewall, verify no proxy set on phone
+	- install uncover ipa on altstore app by clicking on +
+	- then launch uncover on phone
+
+	- Other way with 3utools:
+	- http://www.3u.com/news/articles/1505/how-to-install-ipa-file-in-iphone-using-3utools
+	- Download and install on your laptop http://www.3u.com/
+	- Launch 3uTools and connec the phone to laptop
+	- Go to toolbox tab > jail break (at the bottom) > Choose Unc0ver > Then proceed
+	- After that trust the Unc0ver on iPhone (go to Settings > General > Profile & Device Management > Find the developer app and trust it.)
+	- Launch Unc0ver on iPhone, jailbreak it
+
+	-> Link: https://ios.cfw.guide/installing-odysseyra1n/
+
+Jailbreak iOS 14:
+	
+	-checkra1n: https://checkra.in/
+
+Jailbreak iOS 15-16:
+	
+	- palera1n: https://pangu8.com/jailbreak/palera1n/
+
+
+Bypass root detection:
+
+	-> Code share: https://codeshare.frida.re/browse
+
+	-> https://codeshare.frida.re/@dzonerzy/fridantiroot/
+		-> frida -H 192.168.1.26:19999 --codeshare dzonerzy/fridantiroot -f com.Example.app 
+		-> frida -H 192.168.1.26:19999 --codeshare ub3rsick/rootbeer-root-detection-bypass -f com.Example.app 
+
+	-> frida -U -l RootAndSSLBypass.js -f com.abc.abc --no-pause
+
+	-> objection -g <package_name> explore --startup-command 'android root disable'
+
+	-> Android tweaks: Magisk (Zigysk), RootCloak
+	
+	-> For iOS: Frida, Liberty, FlyJB, Objection: https://www.appknox.com/blog/ios-jailbreak-detection-bypass
+
+
+Mitigations:
+	- Sensitive data in memory: https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#checking-memory-for-sensitive-data-mstg-storage-10
+
+
+Android sensitive locations (https://mobile-security.gitbook.io/mobile-security-testing-guide/android-testing-guide/0x05d-testing-data-storage):
+	- Shared Preferences
+	- SQLite Databases
+	- Firebase Databases
+	- Realm Databases
+	- Internal Storage
+	- External Storage
+	- Keystore
+
+	- Logging Functions
+	- Android Backups
+	- Processes Memory
+	- Keyboard Caches
+	- Screenshots
+
+
+
+Android debug test:
+
+	- get the PID of the app:
+
+		-> frida-ps -Uai
+
+	- Forward the app debug output to the debugger:
+
+		-> adb forward tcp:1337 jdwp:<PID>
+
+	- Connect to the debugger:
+
+		-> (echo suspend && cat) | jdb -attach localhost:1337
+
+
+iOS debug:
+
+	- https://felipejfc.medium.com/the-ultimate-guide-for-live-debugging-apps-on-jailbroken-ios-12-4c5b48adf2fb
+
+
+Android Drozer framework:
+	
+	sudo docker pull yogehi/drozer_docker
+	adb forward tcp:31415 tcp:31415
+	sudo docker run -it --net=host yogehi/drozer_docker
+	drozer console connect --server 127.0.0.1:31415
+
+	=> Drozer app must be in foreground on the phone
+
+	Run the activity:
+	run app.activity.start --component com.yogehi.blobfish com.yogehi.blobfish.example.activity.example1_getIntent
+	
+	Run the activity with extra data:
+	run app.activity.start --component com.yogehi.blobfish com.yogehi.blobfish.example.activity.example1_getIntent --extra string "yay" "Hello World Yay"
+
+	Print flag:
+	run app.activity.start --component com.yogehi.blobfish com.yogehi.blobfish.MainActivity --extra integer DgkjG7XcbwJHgu3p 76597 --extra string VkUxvrEGtQ3x4BfV LWrz3xfqQ58sG3WN --extra boolean KrjvsVWd7rs9YYwW true --extra string android.intent.extra.REFERRER_NAME com.yogehi.blobfish
+
+
+Android Intent and Activities:
+	
+	- List all the activities (with objection):
+
+		-> android hooking list activities
+
+	- Launch an activity:
+
+		-> android intent launch_activity com.abc.abc.Views.Activities.LoginActivity
+
+
+
+
+More on iOS:
+	-> https://ios.pentestglobal.com/basics/installing-tools
+
+
+iOS Cydia packages:
+	- 
+
+Keylogger:
+	- loki keyboard - https://github.com/IceWreck/LokiBoard-Android-Keylogger
+
+
+iOS App Transport Security (ATS):
+
+	-> check Info.plist for the key NSAppTransportSecurity  (If the NSAllowsArbitraryLoads key is set to YES/TRUE, it will disable all ATS restrictions for all network connections)
+
+iOS get screenshots:
+	
+	-> scp root@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .

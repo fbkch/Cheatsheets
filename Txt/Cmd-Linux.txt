@@ -1,0 +1,121 @@
+ Cheat Sheet :
+
+Supprimer packet linux → sudo apt-get purge --auto-remove packagename
+Afficher connexions → sudo netstat -laputenv
+Afficher services → service --status-all
+Chiffre avec GPG → gpg -c file
+Lister packets installés → apt list --installed
+
+Localiser tous les emplacements d’un fichier → locate file
+Règles firewall → sudo iptables -nvL
+Activer/Désactiver règle firewall → iptables -t filter -A INPUT -p tcp --dport 22 -j ACCEPT
+Reload firewall → sudo /etc/init.d/firewall restart
+Désactiver règles en sortie → iptables -I OUTPUT -j ACCEPT
+Voir si un packet est installé (ici apache perl) → dpkg -s apache-perl
+
+Lister mémoire dure →  df -h
+Alias globaux → etc/bash.bashrc
+Inserer règle iptables ligne 5 → iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 4000 -j ACCEPT
+Mettre a jour db pour la cmd locate → sudo updatedb
+Comparer 2 fichiers → vimdiff
+Rechercher des packets dans apt → apt search xxxx
+
+Listener sur un port (ici 80) → nc -lvkp 80
+Faire en sorte qu’une cmd tourne en arrière plan → ajouter & à la fin
+Kill tous les pid d’un service (ici le ssh) → killall ssh
+Changer le shell par défaut (ici mettre fish) →    chsh -s /usr/bin/fish
+Joindre un host sur une autre interface (ici sur le wifi) → sudo route add -host 192.168.1.21 dev wlp3s0
+Requete dans un dossier de dump →  grep -nRi toto *
+
+Grep pour retirer les lignes avec un pattern → grep -iv pattern
+Insérer du python (ou autre) dans une cmd bash → utiliser ` ex :  echo `python -c "print 'A'*10"`
+
+
+Afficher un fichier gz -> zcat file.txt.gz
+Trouver toutes les infos et l'emplacement d'une commande -> whereis cmd
+
+Rechercher un fichier contenant une string -> grep -rnw /path/ -e 'string'
+Lister les user sudoers -> grep -Po '^sudo.+:\K.*$' /etc/group
+
+Rebase the origin of git repo (to push over ssh)  -> git remote set-url origin git@github.com:FredBk/Scripts.git
+Generate alphabet with new line -> echo {A..Z}$'\n'
+
+
+Add user in group -> sudo usermod -a -G [group] [user]
+Find all SUID binary -> find / -user root -perm -4000 -print 2>/dev/null
+If apt-get is blocked by lock -> ps aux | grep apt (and then kill the process)
+UnTar a tar file -> tar -xvzf file.tar.gz
+Lister les jobs -> jobs -l
+Set a job to foreground  (here the job id is 1) -> fg %1
+
+Clear history of the current session and bash history -> cat /dev/null > ~/.bash_history && history -c && exit
+Remove a service from startup -> sudo systemctl disable [service]
+Select the discover ports with Nmap and concatenate it with the ip address -> cat scan | awk -F '/' '{print "192.168.x.x:"$1}' > target
+
+Check the pages of man available for a program -> whatis ls
+View the manual page number 2 -> man 2 ls
+
+Delete route from the kernel routing table -> sudo route del -net 0.0.0.0 gw 192.168.178.1 netmask 0.0.0.0 dev eth0
+Print maximum of number of threads	->	cat /proc/sys/kernel/threads-max
+
+DNS zone transfert with host cmd -> $ host -t ns blabla.com
+									$ host -l blabla.com ns1.blabla.com
+
+Add "hey" at the end of the file	->	mv myfile{,hey}
+
+Detach a screen session 	-> CRTL + A + D
+List screen sessions	->	screen -ls
+Attach a screen session		->	screen -r [111111]
+Kill a session 		->		screen -X -S [111122] quit
+Give a name to session	->	screen -S myname
+
+Grep exactly the pattern	->		grep -w "deiauk" textfile
+
+
+DNS Zone transfer	-> host -t axfr target.domain.name target-dns-server
+					-> dig axfr @target-dns-server target.domain.name
+
+
+Check connection status (count)		->	netstat -tan | awk '{print $6}' | sort | uniq -c
+									->	ss -s	
+
+List SUID binaries	->	find / -perm -u=s -type f 2>/dev/null
+
+Create a list from the words on a web page	->	cewl http://test.com > dict.txt
+
+Get git repository from a web server	->	gitdumper.sh http://test.com/.git/
+
+AWS list	->	s3 ls s3://mytest
+
+AWS copy file	->	s3 cp s3://mytest/myfile /tmp/myfile
+
+
+Get ACL of a file		->	getfacl myfile
+
+Mount a share	->	mount -t nfs 192.x.x.x:/remote/path/ /tmp/folder/
+
+Display Metadata pdf 	->	pdfinfo file.pdf
+
+Grep line which contains a string	->	grep -E 'hello|world|tester' abc.log
+
+Grep line which not contains a string	->	grep -v 'test' abc.log
+
+Find a file in all current and subfolders	->	find . -name "foo*"
+
+Find a directory	->	find / -type d -name 'myfolder'
+
+Decode zip encoded text		->	echo -n "H4sIAMvOiV4A/wVAIQ0AAAjLwh4Gi3gFBAIuqf9xtimk6i8M0yWJIw0AAAA=" | base64 -d | gunzip -c
+
+Mount folder in Kali Guest VMWare (in case of an error) 	->  sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
+
+Find string in all files recursively -> grep -r "texthere" .
+
+Add string before each line in a file  ->  awk '{print "abdce" $1}' list-of-files.txt > new_file
+
+
+Mount shared folder on linux guest VMWare  ->  sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
+
+Restart docker (whenever the docker network doesn't work) ->  service docker restart
+
+Use a different Java JDK for ysoserial -> JDK/jdk-13/bin/java -jar ysoserial-all.jar CommonsCollections4 'test' | base64 -w 0
+

@@ -1,0 +1,176 @@
+{
+  "main": {
+    "id": "59f539b166c8f4bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d658dd758dc372c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e236133e196c5a57",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Linux-cmd.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a5c89abe7a51c9b7",
+    "type": "split",
+    "children": [
+      {
+        "id": "0fe3a78f57177770",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4db3520a9b56fa56",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8ad1b4ec6892bbc9",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#04ff00",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8a22ad71c6046ea1",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "55684f01bfadec96",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 231.5
+  },
+  "right": {
+    "id": "8802eec9d482d4cb",
+    "type": "split",
+    "children": [
+      {
+        "id": "a4602def912bdc74",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "67adb09ffe4a39ce",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Linux-cmd.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9734b6e00297dc81",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Linux-cmd.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "dabec7d6e60b67cf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "52e0a31c3610c974",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Linux-cmd.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
+    }
+  },
+  "active": "e236133e196c5a57",
+  "lastOpenFiles": [
+    "README.md",
+    "Txt/Network.txt",
+    "Txt/Mobile-App.txt",
+    "Txt/OSCP-Cheatsheet.txt",
+    "Txt/Realist-CTF-2.txt",
+    "Txt/Realist-CTF-1.txt",
+    "Txt/Web-App.txt",
+    "Txt/Useful-Links.txt",
+    "Txt/Thick-Client.txt",
+    "Txt/Cmd-Windows.txt",
+    "Txt/Cmd-Linux.txt",
+    "Linux-cmd.md",
+    "Untitled 1.canvas",
+    "Untitled.canvas"
+  ]
+}
