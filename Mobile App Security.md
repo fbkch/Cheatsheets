@@ -86,8 +86,8 @@ Reverse with Hopper disassembler:
 
 -> adb reverse tcp:8082 tcp:8082 (forward traffic) + configure network proxy on the device to 127.0.0.1:8082
 
--List installed apps	=> adb shell cmd package list packages
--Simulate typing of text/characters => adb shell "input keyboard text 'ABC'"
+- List installed apps	=> adb shell cmd package list packages
+- Simulate typing of text/characters => adb shell "input keyboard text 'ABC'"
 
 - Get file from rooted phone:
 	-> adb -d shell "su -c cat /sbin/.magisk/mirror/data/data/xx.com.xxxapp.xxx/app_webview/Default/databases/file__0/1" > data_android.db
@@ -380,7 +380,7 @@ iOS (JailBroken):
 	-> (on Device through ssh) uname -a
 	-> download the correct frida server: https://github.com/frida/frida/releases 
 	-> (on Kali) scp frida-server-12.2.29-android-arm64 <username>@<ip>:<path to destination> 
-	-> (on Device )chmod 755 frida-server-12.2.29-android-arm64 
+	-> (on Device ) chmod 755 frida-server-12.2.29-android-arm64 
 	-> (on Device) ./frida-server-12.2.29-android-arm64 & 
 	-> (on Kali) frida-ps -U
 	-> (on Kali) frida-ps -Uai

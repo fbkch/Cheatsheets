@@ -8,27 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6447e732a4d891cd",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
             "id": "74e9af6f1ed2b974",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mobile App Security.md",
+                "file": "Red Team.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -86,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8802eec9d482d4cb",
@@ -102,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Mobile App Security.md",
+                "file": "Red Team.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Mobile App Security.md",
+                "file": "Red Team.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,12 +134,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Mobile App Security.md"
+                "file": "Red Team.md"
               }
             }
           },
           {
-            "id": "b5a2b3c64a01d513",
+            "id": "6b9a1a38ad09660e",
             "type": "leaf",
             "state": {
               "type": "side-panel-control-view",
@@ -175,12 +167,12 @@
   },
   "active": "74e9af6f1ed2b974",
   "lastOpenFiles": [
-    "Linux Cmd.md",
+    "README.md",
     "Mobile App Security.md",
+    "Red Team.md",
+    "Linux Cmd.md",
     "Windows Cmd.md",
     "Git Cmd.md",
-    "Red Team.md",
-    "README.md",
     "Txt/Network.txt",
     "Txt/Mobile-App.txt",
     "Txt/OSCP-Cheatsheet.txt",
