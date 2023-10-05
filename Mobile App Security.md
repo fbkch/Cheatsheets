@@ -194,6 +194,13 @@ drozer console connect --server 127.0.0.1:31415
 	-> android intent launch_activity com.abc.abc.Views.Activities.LoginActivity
 ```
 
+###### <font style="color:#00b3ff">Android Screenshots Location</font> 
+
+```
+/sdcard/DCIM/Screenshots
+```
+
+
 ---
 ## iOS
 

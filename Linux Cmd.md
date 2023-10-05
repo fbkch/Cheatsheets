@@ -429,3 +429,10 @@ service docker restart
 JDK/jdk-13/bin/java -jar ysoserial-all.jar CommonsCollections4 'test' | base64 -w 0
 ```
 
+
+###### <font style="color:#00b3ff">Enable logging on terminal</font>
+
+``` 
+script ~/.terminal-logs/$(date +%Y-%m-%d_%H:%M:%S:%N).log
+```
+

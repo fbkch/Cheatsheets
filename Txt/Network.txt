@@ -33,10 +33,10 @@
 	Other option: 
 
 	- TCP: 
-		nmap -n -Pn -vv -p 0-65535 -sV --min-rate 350 --min-parallelism 5 --max-retries 5 --max-scan-delay 10 --max-rtt-timeout 400ms <IP/hostname> -oA <proj name>
+		nmap -n -Pn -vv -p 0-65535 -sV --min-rate 350 --min-parallelism 5 --max-retries 5 --max-scan-delay 10 --max-rtt-timeout 400ms -iL <list_IP/hostname> -oA <proj name>
 
 	- UDP: 
-		nmap -n -Pn -vv -p 0-65535 --min-rate 350 --min-parallelism 5 --max-retries 5 --max-scan-delay 10 --max-rtt-timeout 400ms <IP/hostname> -sU -oA <proj name>
+		sudo nmap -n -Pn -vv -p 0-65535 --min-rate 350 --min-parallelism 5 --max-retries 5 --max-scan-delay 10 --max-rtt-timeout 400ms -iL <list_IP/hostname> -sU -oA <proj name>
 
 		=> scan the open ports with -sV 
 
@@ -44,7 +44,7 @@
 		masscan -pU:1-65535 --rate=10000 <ipaddress>
 
 	- IP: 
-		nmap -sO -p- <IP/hostname> -Pn -v -oA <proj name>
+		sudo nmap -sO -p- -iL <list_IP/hostname> -Pn -v -oA <proj name>
 
 	=> read targets from file: -iL targets.txt
 
