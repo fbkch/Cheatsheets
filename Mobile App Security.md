@@ -306,7 +306,7 @@ alpine
 - install uncover ipa in iCloud
 - delete old altstore, uncover from the phone
 - on laptop install: altserver, iCloud (not from Microsoft Store), iTunes
-- when launching altstore input the good location folder, open iCloud, iTunes at the same time (create an Apple ID if needed)
+- when launching altstore input the good location folder, open iCloud (and login), iTunes at the same time (create an Apple ID if needed)
 - disable firewall, verify no proxy set on phone
 - install uncover ipa on altstore app by clicking on +
 - then launch uncover on phone
@@ -318,6 +318,7 @@ alpine
 	- Go to toolbox tab > jail break (at the bottom) > Choose Unc0ver > Then proceed
 	- After that trust the Unc0ver on iPhone (go to Settings > General > Profile & Device Management > Find the developer app and trust it.)
 	- Launch Unc0ver on iPhone, jailbreak it
+	- Install .ipa apps in /var/mobile/Downloads
 
 -> Link: https://ios.cfw.guide/installing-odysseyra1n/
 ```

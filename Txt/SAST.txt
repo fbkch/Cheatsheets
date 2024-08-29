@@ -1,0 +1,23 @@
+Run semgrep (Windows):
+
+	-> winpty docker run -it returntocorp/semgrep semgrep login
+
+	-> docker run -e SEMGREP_APP_TOKEN=token_qwerty --rm -v "C:\folder_to_scan:/src" returntocorp/semgrep semgrep scan --config=auto --output scan_results.json --json
+
+
+	Add rules:
+
+		-> docker run -e SEMGREP_APP_TOKEN=token_qwerty --rm -v "C:\folder_to_scan:/src" returntocorp/semgrep semgrep scan --config=auto --config "p/ruby" --output scan_results.txt --text 
+
+
+Ruby on Rails:
+
+	-> brakeman
+
+	-> bundle-audit:
+		- bundle-audit check --no-update
+
+
+JS:
+
+	-> yarn audit
