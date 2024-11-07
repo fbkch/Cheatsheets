@@ -309,3 +309,68 @@ kubectl config --kubeconfig=/root/my-kube-config use-context research
 kubectl get roles -A
 ```
 
+###### <font style="color:#00b3ff">Create a role</font> 
+
+```
+kubectl create role developer --namespace=default --verb=list,create,delete --resource=pods
+```
+###### <font style="color:#00b3ff">Assign a role</font> 
+
+```
+kubectl create rolebinding dev-user-binding --namespace=default --role=developer --user=dev-user
+```
+
+###### <font style="color:#00b3ff">Edit a role in a specific namespace</font> 
+
+```
+kubectl edit role developer -n blue
+```
+
+###### <font style="color:#00b3ff">Get and count cluster roles</font> 
+
+```
+kubectl get clusterroles --no-headers | wc -l
+```
+
+###### <font style="color:#00b3ff">Check if a resource is not namespaced</font> 
+
+```
+kubectl api-resources --namespaced=false
+```
+
+###### <font style="color:#00b3ff">Test if a user can perform an action</font> 
+
+```
+kubectl auth can-i list nodes --as michelle
+```
+
+### Service Accounts
+###### <font style="color:#00b3ff">Set the service account in a deployment </font> 
+
+```
+kubectl set serviceaccount deploy/web-dashboard dashboard-sa 
+```
+
+
+### Network Policies
+###### <font style="color:#00b3ff">Get the network policies </font> 
+
+```
+kubectl get networkpolicy
+```
+
+
+### Persistent Volume Claims
+###### <font style="color:#00b3ff">Get the Persistent Volume Claims and Persistent Volume </font> 
+
+```
+kubectl get pv,pvc
+```
+
+### CNI
+###### <font style="color:#00b3ff">Identify the container runtime endpoint</font> 
+
+```
+ps -aux | grep kubelet | grep --color container-runtime-endpoint
+```
+
