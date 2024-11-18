@@ -359,6 +359,18 @@ kubectl set serviceaccount deploy/web-dashboard dashboard-sa
 kubectl get networkpolicy
 ```
 
+###### <font style="color:#00b3ff">Get IP range for the services in the cluster</font> 
+
+```
+cat /etc/kubernetes/manifests/kube-apiserver.yaml   | grep cluster-ip-range
+```
+
+###### <font style="color:#00b3ff">Check logs of a kube-proxy pod</font> 
+
+```
+kubectl logs <kube-proxy-pod-name> -n kube-system
+```
+
 
 ### Persistent Volume Claims
 ###### <font style="color:#00b3ff">Get the Persistent Volume Claims and Persistent Volume </font> 
