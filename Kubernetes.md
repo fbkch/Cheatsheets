@@ -386,3 +386,59 @@ kubectl get pv,pvc
 ps -aux | grep kubelet | grep --color container-runtime-endpoint
 ```
 
+### Ingress
+###### <font style="color:#00b3ff">Check the config in the Ingress</font> 
+
+```
+kubectl describe ingress --namespace app-space
+
+If default:
+kubectl get deploy ingress-nginx-controller -n ingress-nginx -o yaml
+```
+
+
+### Additional Notes to prepare the CKA
+
+- exec command (liveness probe) sh -c “wget …”
+- get pod -A
+- export do=“—dry-run=client -o yaml”
+- k -n namespaces blabla …
+- grep -i A2
+- vi: :%s/test/test2/g
+- Questions with .sh, put full command with **kubectl**
+- k top
+- CNI: cat /etc/cni/net.d/10-weave.conflist
+- Service CIDR: cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep range
+- Static pod suffix: node -hostname
+- VIM: visual mode V, select the Y, then paste P
+- Delete specific container in a pod: ssh then crictl rm 1e020b43c4423
+- Remote instruction: ssh cluster1-node2 'crictl logs b01edbe6f89ed' **&>** /opt/course/17/pod-container.log
+- apt show kubelet -a | grep 1.31
+- use labels to find resources:      k get svc,ep -l run=my-static-pod
+- —sort-by=.metadata  (dont forget the dot . in front)
+- emptyDir (temp shared volume in a pod)
+- Node joining full command:      kubeadm token create --print-join-command
+- Apply use-context cmd in every terminal
+- Can curl a pod with its IP (-o wide) even without an SVC
+- Networkpolicy: -to for each rule
+- Kubernetes HTTP API as an SVC: [https://kurbenetes.default/api/v1/[object]](https://kurbenetes.default/api/v1/%5Bobject%5D) (curl -k)
+- k exec mypod -it — sh
+- crictl exec  -it dddwe sh
+- iptables-save
+- Change cluster ip range: kube-apiserver + kube-controller
+- **k explain ingress.spec --recursive** // Use this to explain any resources and get the fields faster
+- k get events --field-selector "involvedObject.name=webpage-server-02"
+- k get events -o yaml
+- Use --sort-by=.blabla.blabla  when sorting output
+- OOMKilled on a pod is memory issue, increase limits.memory
+- HTTProute spec.rules.MATCH.backendRefs.weight 
+- Sidecar is just another container (no need to create an initContainer)
+- HTTProute specify the namespace of the parent class if needed. For the rules do multiple matches
+- Ingress: ssl-redirect in annotations
+- k get po -o json | jq -c 'paths|map(tostring)|join(".")'   // useful cmd to get the path for the jsonpath
+- when using curl to test an svc, specify the svc port
+- Using Range and \n:      k -n project-c13 get pod -o jsonpath="{range .items[*]} {.metadata.name}{.spec.containers[*].resources}{'\n'}"
+- curl -k [https://kubernetes.default/api/v1/secrets](https://kubernetes.default/api/v1/secrets)
+- apt show kubelet -a , apt install kubelet=1.3.2-blabla
+- crictl rm —force
+- nodeSelector, fieldref
