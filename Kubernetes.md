@@ -442,4 +442,4 @@ kubectl get deploy ingress-nginx-controller -n ingress-nginx -o yaml
 - apt show kubelet -a , apt install kubelet=1.3.2-blabla
 - crictl rm —force
 - nodeSelector, fieldref
-- k get po | awk 'NR\==1 {print $1}' | xargs -I {} kubectl get {} -o yaml // know how to play with awk, xargs
+- k get po --no-headers | awk 'NR\==1 {print $1}' | xargs -I {} kubectl get po {} -o yaml // know how to play with awk, xargs
