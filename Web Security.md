@@ -29,10 +29,15 @@
 	- autocomplete on forms
 	- CSRF
 	- Cache control
-	- File Upload
+	- File Upload and Download
 	- Data input validation
 	- Error verbosity
 	- Burp browser DOM invader
+	- session fixation, randomness, protocols (HTTP?)
+	- authentication, 2fa, password change, remember me, SSO
+	- business logic flaws
+	- websockets
+	- privilege escalations
 ```
 
 

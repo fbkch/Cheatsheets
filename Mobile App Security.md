@@ -1,7 +1,7 @@
 ----
 ## Android
 
-###### <font style="color:#00b3ff">Reverse Apk</font> 
+#### Reverse Apk
 
 ```
 d2j-dex2jar test.apk
@@ -12,7 +12,7 @@ d2j-dex2jar test.apk
 -> (complete decompiling): ava -jar apktool_2.3.3.jar d <apk>
 ```
 
-###### <font style="color:#00b3ff">JADX</font> 
+#### JADX
 
 ```
 -> https://github.com/skylot/jadx (download the zip release)
@@ -21,19 +21,19 @@ jadx.bat myApp.apk
 jdax-gui.bat
 ```
 
-###### <font style="color:#00b3ff">Apktool</font> 
+#### Apktool
 
 ```
 apktool d myapp.apk -o extractedFolder
 ```
 
-###### <font style="color:#00b3ff">Extract APK</font> 
+#### Extract APK
 
 ```
 - https://www.alphr.com/extract-apk-android/
 ```
 
-###### <font style="color:#00b3ff">Dynamical Analyses with BurpSuite</font> 
+#### Dynamical Analyses with BurpSuite
 
 ```
 -> Use Burp to intercept the requests on Android
@@ -42,7 +42,7 @@ apktool d myapp.apk -o extractedFolder
 -> Android: https://support.portswigger.net/customer/portal/articles/1841102-Mobile%20Set-up_Android%20Device%20-%20Installing%20CA%20Certificate.html
 ```
 
-###### <font style="color:#00b3ff">Bypass SSL pinning</font> 
+#### Bypass SSL pinning
 
 ```
 -> Android: https://blog.netspi.com/four-ways-bypass-android-ssl-verification-certificate-pinning/
@@ -59,7 +59,7 @@ Configuring Burp Suite With Android Nougat:
 ```
 
 
-###### <font style="color:#00b3ff">Bypass Flutter/Non-HTTP apps</font> 
+#### Bypass Flutter/Non-HTTP apps
 
 ```
 - https://github.com/Impact-I/reFlutter/
@@ -73,7 +73,7 @@ Reverse with Hopper disassembler:
 ```
 
 
-###### <font style="color:#00b3ff">Using ADB</font> 
+#### Using ADB
 
 ```
 -> adb devices (check the device)
@@ -96,7 +96,7 @@ Reverse with Hopper disassembler:
 	-> scrcpy
 ```
 
-###### <font style="color:#00b3ff">Android Patching APK</font> 
+#### Android Patching APK
 
 ```
 -> https://github.com/badadaf/apkpatcher
@@ -107,7 +107,7 @@ Reverse with Hopper disassembler:
 	- https://fadeevab.com/frida-gadget-injection-on-android-no-root-2-methods/
 ```
 
-###### <font style="color:#00b3ff">Android processor architecture</font> 
+#### Android processor architecture
 
 ```
 -> ARM
@@ -115,13 +115,13 @@ Reverse with Hopper disassembler:
 -> MIPS
 ```
 
-###### <font style="color:#00b3ff">Android check the stack smashing protection</font> 
+#### Android check the stack smashing protection
 
 ```
 find . -name "*.so" -exec pwn checksec --file {} \;
 ```
 
-###### <font style="color:#00b3ff">Android Logs reading</font> 
+#### Android Logs reading
 
 ```
 -> use: adb logcat
@@ -130,7 +130,7 @@ adb logcat --pid=$(adb shell pidof -s com.xxxxx.yyyyy)
 adb logcat --pid=12345
 ```
 
-###### <font style="color:#00b3ff">Android sensitive locations</font> 
+#### Android sensitive locations
 
 ```
 - Shared Preferences
@@ -150,7 +150,7 @@ adb logcat --pid=12345
 https://mobile-security.gitbook.io/mobile-security-testing-guide/android-testing-guide/0x05d-testing-data-storage
 ```
 
-###### <font style="color:#00b3ff">Android debug test</font> 
+#### Android debug test
 
 ```
 - get the PID of the app:
@@ -163,7 +163,7 @@ https://mobile-security.gitbook.io/mobile-security-testing-guide/android-testing
 	-> (echo suspend && cat) | jdb -attach localhost:1337
 ```
 
-###### <font style="color:#00b3ff">Android Drozer framework</font> 
+#### Android Drozer framework
 
 ```
 sudo docker pull yogehi/drozer_docker
@@ -184,7 +184,7 @@ drozer console connect --server 127.0.0.1:31415
 	
 ```
 
-###### <font style="color:#00b3ff">Android Intent and Activities</font> 
+#### Android Intent and Activities
 
 ```
 - List all the activities (with objection):
@@ -194,7 +194,7 @@ drozer console connect --server 127.0.0.1:31415
 	-> android intent launch_activity com.abc.abc.Views.Activities.LoginActivity
 ```
 
-###### <font style="color:#00b3ff">Android Screenshots Location</font> 
+#### Android Screenshots Location
 
 ```
 /sdcard/DCIM/Screenshots
@@ -204,7 +204,7 @@ drozer console connect --server 127.0.0.1:31415
 ---
 ## iOS
 
-###### <font style="color:#00b3ff">Reverse .ipa file</font> 
+#### Reverse .ipa file
 
 ```
 -> https://reverseengineering.stackexchange.com/questions/1594/possibilities-for-reverse-engineering-an-ipa-file-to-its-source	
@@ -216,9 +216,12 @@ drozer console connect --server 127.0.0.1:31415
 
 -> copy the entire extracted folder (XXXX.app) in a "Payload" named folder and zip it YourChoiceName.ipa
 	-> zip -r test.ipa Payload
+
+-> Extract the app unencrypted
+python3 frida-ios-dump.py -o decrypted_app.ipa com.company.myapp
 ```
 
-###### <font style="color:#00b3ff">Dynamical Analyses with BurpSuite</font> 
+#### Dynamical Analyses with BurpSuite
 
 ```
 -> iOS: https://portswigger.net/burp/documentation/desktop/mobile/config-ios-device
@@ -226,7 +229,7 @@ drozer console connect --server 127.0.0.1:31415
 -> use Safari to download and install the cert from http://burp
 ```
 
-###### <font style="color:#00b3ff">Bypass SSL pinning</font> 
+#### Bypass SSL pinning
 
 ```
 -> iOS: https://blog.netspi.com/four-ways-to-bypass-ios-ssl-verification-and-certificate-pinning/
@@ -243,7 +246,7 @@ Disable and flush mDNSResponder on iOS:
 -> killall -HUP mDNSResponder; killall -HUP mDNSResponderHelper
 ```
 
-###### <font style="color:#00b3ff">iOS Patching IPA (repackaging)</font> 
+#### iOS Patching IPA (repackaging)
 
 ```
 -> on MacOS, create a 7-days signing certificate with Xcode (Accounts)
@@ -263,7 +266,7 @@ Disable and flush mDNSResponder on iOS:
 -> Install IPA on the phone: XCode > cmd+shift+2 > install on device
 ```
 
-###### <font style="color:#00b3ff">Search for files on the Phone/iPad</font> 
+#### Search for files on the Phone/iPad
 
 ```
 -> get the files concerning the application: 
@@ -271,25 +274,25 @@ Disable and flush mDNSResponder on iOS:
 	grep -rnwi / -e "NameOfApp" > myfile
 ```
 
-###### <font style="color:#00b3ff">iOS default ssh password</font> 
+#### iOS default ssh password
 
 ```
 alpine
 ```
 
-###### <font style="color:#00b3ff">iOS DCIM directory</font> 
+#### iOS DCIM directory
 
 ```
 /private/var/mobile/Media/DCIM/
 ```
 
-###### <font style="color:#00b3ff">iOS Application path</font> 
+#### iOS Application path
 
 ```
 /var/containers/Bundle/Application/
 ```
 
-###### <font style="color:#00b3ff">iOS Logs reading</font> 
+#### iOS Logs reading
 
 ```
 -> use itools on Windows
@@ -300,7 +303,7 @@ alpine
 		idevicesyslog -u <device_ID> 
 ```
 
-###### <font style="color:#00b3ff">Jailbreak iOS 13</font> 
+#### Jailbreak iOS 13
 
 ```
 - install uncover ipa in iCloud
@@ -323,25 +326,25 @@ alpine
 -> Link: https://ios.cfw.guide/installing-odysseyra1n/
 ```
 
-###### <font style="color:#00b3ff">Jailbreak iOS 14</font> 
+#### Jailbreak iOS 14
 
 ```
 - checkra1n: https://checkra.in/
 ```
 
-###### <font style="color:#00b3ff">Jailbreak iOS 15-16</font> 
+#### Jailbreak iOS 15-16
 
 ```
 - palera1n: https://pangu8.com/jailbreak/palera1n/
 ```
 
-###### <font style="color:#00b3ff">iOS App Transport Security (ATS)</font> 
+#### iOS App Transport Security (ATS)
 
 ```
 -> check Info.plist for the key NSAppTransportSecurity  (If the NSAllowsArbitraryLoads key is set to YES/TRUE, it will disable all ATS restrictions for all network connections)
 ```
 
-###### <font style="color:#00b3ff">iOS get screenshots (specific number)</font> 
+#### iOS get screenshots (specific number)
 
 ```
 scp root@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .
@@ -351,7 +354,7 @@ scp root@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .
 ---
 ### Frameworks
 
-###### <font style="color:#00b3ff">Frameworks installation</font> 
+#### Frameworks installation
 
 ```
 -> install frida-tools (https://www.frida.re/docs/installation/)
@@ -361,14 +364,14 @@ scp root@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .
 -> iOS instrumentation: https://github.com/ChiChou/grapefruit
 ```
 
-###### <font style="color:#00b3ff">Objection and Frida installation</font> 
+#### Objection and Frida installation
 
 ```
 pip install frida-tools
 pip install objection
 ```
 
-###### <font style="color:#00b3ff">Frida Framework</font> 
+#### Frida Framework
 
 ```
 Android (rooted):
@@ -396,7 +399,7 @@ iOS (JailBroken):
 ```
 
 
-###### <font style="color:#00b3ff">MobSF Framework</font> 
+#### MobSF Framework
 
 ```
 -> git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF
@@ -407,20 +410,20 @@ iOS (JailBroken):
 => use the docker image in case of versions bugs
 ```
 
-###### <font style="color:#00b3ff">Listening remotely with frida-server (on phone, IP of the phone)</font> 
+#### Listening remotely with frida-server (on phone, IP of the phone)
 
 ```
 frida-server -l 0.0.0.0:19999 &
 ```
 
-###### <font style="color:#00b3ff">Using Frida tools to get the PID of the target app</font> 
+#### Using Frida tools to get the PID of the target app
 
 ```
 -> frida-ps -ai -H 192.168.99.242:27043   (in case of remote frida server)
 -> frida-ps -Uai      (in case of usb connected frida server)
 ```
 
-###### <font style="color:#00b3ff">Connect to remote frida server with custom port (pid of app is 1983 here)</font> 
+#### Connect to remote frida server with custom port (pid of app is 1983 here)
 
 ```
 -> objection -N --host 192.168.99.242 --port 27043 -g 1983 explore
@@ -429,7 +432,7 @@ frida-server -l 0.0.0.0:19999 &
 -> frida-ps -Uai      (in case of usb connected frida server)
 ```
 
-###### <font style="color:#00b3ff">Connect to remote frida server with custom port (pid of app is 1983 here)</font> 
+#### Connect to remote frida server with custom port (pid of app is 1983 here)
 
 ```
 -> objection -N --host 192.168.99.242 --port 19999 -g 1983 explore
@@ -439,32 +442,32 @@ frida-server -l 0.0.0.0:19999 &
 -> objection -N --host 192.168.99.242 --port 19999 -g com.google.android.gm explore
 ```
 
-###### <font style="color:#00b3ff">Connect to local frida (phone connected via usb)</font> 
+#### Connect to local frida (phone connected via usb)
 
 ```
 objection -g 1983 explore
 ```
 
-###### <font style="color:#00b3ff">Import AES hook script with objection</font> 
+#### Import AES hook script with objection
 
 ```
 import aes-hook.js
 ```
 
-###### <font style="color:#00b3ff">Objection dumping memory</font> 
+#### Objection dumping memory
 
 ```
 memory dump all dump.txt
-string dump.txt > strings.txt 
+strings dump.txt > strings.txt 
 ```
 
-###### <font style="color:#00b3ff">Objection runtime injection test</font> 
+#### Objection runtime injection test
 
 ```
 ios ui alert "injection test"
 ```
 
-###### <font style="color:#00b3ff">Objection remove jailbreak detection on an app</font> 
+#### Objection remove jailbreak detection on an app
 
 ```
 objection -g “<package_name>” explore --startup-command 'ios jailbreak disable' 
@@ -472,7 +475,7 @@ objection -g “<package_name>” explore --startup-command 'ios jailbreak disab
 objection -N --host 192.168.99.242 --port 19999 -g ID_of_app explore --startup-command 'ios jailbreak disable'
 ```
 
-###### <font style="color:#00b3ff">Objection Inspect cache and DB</font> 
+#### Objection Inspect cache and DB
 
 ```
 - iOS:
@@ -484,7 +487,7 @@ objection -N --host 192.168.99.242 --port 19999 -g ID_of_app explore --startup-c
 		-> select * from table_name
 ```
 
-###### <font style="color:#00b3ff">Objection Hooking methods</font> 
+#### Objection Hooking methods
 
 ```
 - Android:
@@ -497,7 +500,7 @@ objection -N --host 192.168.99.242 --port 19999 -g ID_of_app explore --startup-c
 		-> ios hooking generate simple <class_name>
 ```
 
-###### <font style="color:#00b3ff">Frida script example for injection</font> 
+#### Frida script example for injection
 
 ```
 Java.perform(function() {
@@ -508,19 +511,19 @@ Java.perform(function() {
 		});
 ```
 
-###### <font style="color:#00b3ff">Frida run script</font> 
+#### Frida run script
 
 ```
 frida -U myApp -l myscript.js --debug
 ```
 
-###### <font style="color:#00b3ff">Frida trace application</font> 
+#### Frida trace application
 
 ```
 frida-trace -U --decorate -i "recv*" -i "send*" myApplication
 ```
 
-###### <font style="color:#00b3ff">Frida trace iOS</font> 
+#### Frida trace iOS
 
 ```
 -> in the Hooking script:
@@ -542,7 +545,7 @@ frida-trace -U --decorate -i "recv*" -i "send*" myApplication
 	objection -g com.abc.abc explore -s "ios hooking watch method \"-[ThreatClass isJailbroken]\" --dump-args --dump-return --dump-backtrace"
 ```
 
-###### <font style="color:#00b3ff">Bypass root/jailbreak detection</font> 
+#### Bypass root/jailbreak detection
 
 ```
 -> Code share: 
@@ -565,31 +568,31 @@ https://codeshare.frida.re/@dzonerzy/fridantiroot/
 ---
 ### Links
 
-###### <font style="color:#00b3ff">Dynamical Analysis</font> 
+#### Dynamical Analysis
 
 ```
 https://medium.com/@ansjdnakjdnajkd/dynamic-analysis-of-ios-apps-wo-jailbreak-1481ab3020d8
 ```
 
-###### <font style="color:#00b3ff">Mobile App Analysis Platform</font> 
+#### Mobile App Analysis Platform
 
 ```
 https://github.com/m0bilesecurity/RMS-Runtime-Mobile-Security
 ```
 
-###### <font style="color:#00b3ff">Frida docs</font> 
+#### Frida docs
 
 ```
 https://learnfrida.info/java/
 ```
 
-###### <font style="color:#00b3ff">Check availability of an app region-locked</font> 
+#### Check availability of an app region-locked
 
 ```
 https://fnd.io/
 ```
 
-###### <font style="color:#00b3ff">Android Tapjacking PoC</font> 
+#### Android Tapjacking PoC
 
 ```
 https://github.com/geeksonsecurity/android-overlay-malware-example
@@ -597,7 +600,7 @@ https://github.com/geeksonsecurity/android-overlay-malware-example
 https://apkpure.com/overlay-test/com.mebarin.overlaytest
 ```
 
-###### <font style="color:#00b3ff">Manual</font> 
+#### Manual
 
 ```
 https://github.com/OWASP/owasp-mstg
@@ -606,7 +609,7 @@ Objection commands documentation:
 	https://github.com/sensepost/objection/tree/master/objection/console/helpfiles
 ```
 
-###### <font style="color:#00b3ff">Mitigations</font> 
+#### Mitigations
 
 ```
 - Sensitive data in memory: 
@@ -614,22 +617,197 @@ Objection commands documentation:
 https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#checking-memory-for-sensitive-data-mstg-storage-10
 ```
 
-###### <font style="color:#00b3ff">iOS debug</font> 
+#### iOS debug
 
 ```
 https://felipejfc.medium.com/the-ultimate-guide-for-live-debugging-apps-on-jailbroken-ios-12-4c5b48adf2fb
 ```
 
-###### <font style="color:#00b3ff">iOS testing</font> 
+#### iOS testing
 
 ```
 https://ios.pentestglobal.com/basics/installing-tools
 ```
 
-###### <font style="color:#00b3ff">Android Keylogger</font> 
+#### Android Keylogger
 
 ```
 - loki keyboard:
 
 https://github.com/IceWreck/LokiBoard-Android-Keylogger
+```
+
+#### 🛠️ **Jailbreak Tweaks (from Cydia/Sileo)**
+
+| Tweak                     | Purpose                                |
+| ------------------------- | -------------------------------------- |
+| **Filza File Manager**    | Full file system access, edit app data |
+| **AppSync Unified**       | Sideload unsigned apps (test builds)   |
+| **Cycript** (if old iOS)  | Runtime analysis (less used today)     |
+| **Liberty Lite / HideJB** | Hide jailbreak from apps               |
+
+#### Jailbreak Palera1n
+
+##### 1st Step
+- palera1n -f -c
+##### 2nd Step (to run also after a shutdown)
+- palera1n -f
+
+#### Root Samsung Phone with Heimdall CLI
+
+- 1st Part: OEM Unlocked (via Download mode) + USB debugging + Patch the firmware with Magisk on the phone + Get back the file on your laptop
+- 2nd Part: Phone in Download mode + heimdall flash --BOOT boot.img --INIT_BOOT init_boot.img --no-reboot + boot in recovery mode to be sure (Volume Up + Power Key)
+
+
+#### Vulnerabilities Checklist
+
+[Android] Local Authentication Bypass
+[Android] Unencrypted User Keys
+[Android] Minimum SDK Version Not Enforced / Lower than Recommended
+
+[Android] Permission Protection Level Downgrade
+[Android] Tapjacking Vulnerability
+[Android] Third Party Content Loaded Within WebView
+[Android] No Emulator Detection
+[Android] WebView JavaScript Enabled
+[Android] Application Backups Allowed
+[Android] Application Signed using v1 Signature Scheme
+[Android] Application Debuggable Flag Set
+[Android] WebView File Access Enabled
+[Android] Ineffective/No Root Detection
+[Android] Insufficient/No Code Obfuscation
+[Android] Ineffective Tapjacking Mitigation
+[Android] Cleartext Traffic Allowed
+[Android] Unprotected Activity
+[Android] Exported Content Providers 	- Check for unprotected content providers that expose sensitive data
+[Android] Intent Sniffing/Hijacking 	- Verify protection against malicious apps intercepting intents
+[Android] Deep Link Validation 		- Ensure proper validation of deep links to prevent injection attacks
+[Android] Insecure Broadcast Receivers 	- Check for sensitive information leakage via broadcasts
+[Android] WebView Remote Debugging Enabled 	- Can lead to data exposure
+[Android] Unsafe Implementation of BiometricPrompt API 	- Improper implementation can lead to bypasses
+[Android] Native Library Vulnerabilities 	- Check for memory corruption issues in native code
+[Android] Accessibility Service Misuse 	- Protection against screen readers capturing sensitive information
+[Android] Firebase Database Misconfiguration 	- Public/insecure database rules
+[Android] Android Keystore Implementation Issues 	- Check for proper use of the Android Keystore
+
+[Android]/[iOS]  Custom Keyboards Permitted
+[Android]/[iOS] Sensitive Information Not Obscured when Taking Screenshots
+[Android]/[iOS] No Logout on Device Lock
+[Android]/[iOS] No SSL/TLS Certificate Pinning
+[Android]/[iOS] Clipboard Enabled on Sensitive Fields
+[Android]/[iOS] Apache Cordova Log Level Debug
+[Android]/[iOS] Unencrypted Databases
+[Android]/[iOS] Development Information Disclosure
+[Android]/[iOS] Application Does Not Obscure Screenshot When Backgrounded
+[Android]/[iOS] Debug Logs Enabled
+[Android]/[iOS] Ineffective Anti-Hooking Detection
+[Android]/[iOS] Sensitive Information Not Cleared on Logout
+[Android]/[iOS] No Logout on Minimise
+[Android]/[iOS] Sensitive Information Stored in Directory Folder
+[Android]/[iOS] API Key Protection 		- Hardcoded API keys, tokens, or credentials
+[Android]/[iOS] Session Handling Vulnerabilities 		- Improper session management
+[Android]/[iOS] EXIF Data Exposure 			- Check if uploaded images retain sensitive metadata
+[Android]/[iOS] Insecure WebSockets Implementation 		- Verify TLS usage and proper authentication
+[Android]/[iOS] Insecure JWT Implementation 		- Check for proper validation of JWTs
+[Android]/[iOS] Hardcoded Encryption Keys 		- Look for encryption keys in the code
+[Android]/[iOS] Insecure Deeplink Handling 		- Validate handling of deeplinks to prevent injection attacks
+[Android]/[iOS] Memory Dump Analysis 		- Check if sensitive data can be extracted from memory dumps
+[Android]/[iOS] Poor Protection against Binary Analysis Tools 		- Resistance to static analysis tools
+[Android]/[iOS] Unrestricted File Upload 		- Verify file upload validation
+[Android]/[iOS] Man-in-the-Disk Attacks 		- Check for vulnerabilities in shared external storage
+[Android]/[iOS] OAuth2 Flow Implementation Issues 		- Verify proper implementation of OAuth
+[Android]/[iOS] Weak Input Validation 		- Check for SQLi, XSS in WebViews, etc.
+[Android]/[iOS] Push Notification Security 		- Ensure push notifications don't contain sensitive data
+[Android]/[iOS] Compliance Checks (GDPR, CCPA, etc.) 		- Verify data handling practices
+
+[iOS] Application Accepts All Registered Biometric Identities
+[iOS] Local Authentication Bypass
+[iOS] Insecure Keychain Storage
+[iOS] File Sharing
+[iOS] No Anti-Debugging Protection
+[iOS] Insufficient Code Obfuscation
+[iOS] File Path Information Leakage
+[iOS] iOS Request Caching
+[iOS] Ineffective / No Jailbreak Detection
+[iOS] App Transport Security (ATS)
+[iOS] URL Scheme Hijacking - Check for proper URL scheme handling
+[iOS] Improper Use of Pasteboard - Sensitive data might be accessible by other apps
+[iOS] Insecure Swift/Objective-C Method Calls - Dynamic method invocation vulnerabilities
+[iOS] UIWebView Usage (deprecated) - Should use WKWebView instead
+[iOS] Broken App Sandbox - Check for sandbox escapes
+[iOS] NSUserDefaults for Sensitive Data - Should use Keychain instead
+[iOS] Insecure Touch ID/Face ID Implementation - Check LAContext usage
+
+#### Web3 Wallets App
+
+- How is the wallet private key stored on the device
+- What algorithm to encrypt the wallet private key
+- Is the private key sent to the server
+- Can we bypass the user's PIN to send transactions ?
+- How is the wallet private key generated ?
+	- Generated **locally** on the device using a secure random number generator.
+	- Often derived from a **BIP-39 mnemonic seed phrase** (e.g., 12 or 24 words).
+	- The seed phrase is used with **BIP-32/BIP-44** to derive multiple private keys deterministically.
+- Check Keychain and Keystore with correct encryption method such as AES + GCM, any hardcoded IV or key etc and then flag/attribute is also important such as kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly is consider stronger than kSecAttrAccessibleAlways, the key can be in insecure storage such as UserDefault, SharedPreferences.
+- Android Keystore can only save cryptographic key, usually they use EncryptedSharedPreference + the key generated from Keystore
+
+### What Wallets Should Not Do:
+
+- They **do not send the private key to servers** (in non-custodial apps).
+- They **do not store unencrypted private keys** on disk.
+- They **do not use a single key for all accounts**, thanks to HD wallet standards (BIP-32/44).
+
+### 🔍 How to Find Crypto Operations on Apps (Reverse Engineering)
+
+### On **Android**:
+
+- Use `jadx` or `frida` to look for:
+    
+    - `KeyGenParameterSpec`
+        
+    - `KeyStore.getInstance("AndroidKeyStore")`
+        
+    - `Cipher.getInstance("AES/GCM/NoPadding")`
+        
+    - Realm config with `encryptionKey`
+        
+
+### On **iOS**:
+
+- Use `class-dump` or `frida` to find:
+    
+    - `SecItemAdd`, `SecItemCopyMatching`
+        
+    - Any method returning `NSData` of 64 bytes
+        
+    - `RLMRealmConfiguration` with `encryptionKey` property
+
+
+#### Working Combo of Frida, Frida-tools, Objection 
+
+**➜**  **tools** frida --version      
+
+16.1.3
+
+**➜**  **tools** objection version    
+
+objection: 1.11.0
+
+**➜**  **tools** pip show frida-tools
+
+Name: frida-tools
+
+Version: 12.1.0
+
+=> Also use objection with the name of the app (instead of the ID if there is a timeout issue) (or the opposite, ID instead of name !)
+```
+objection -g blabla.myapp.ios explore
+objection -g 1232 explore
+```
+
+=> objection and frida issue on Android, do the below commands on the Android device:
+
+```
+pm uninstall com.google.android.art
+reboot
 ```
