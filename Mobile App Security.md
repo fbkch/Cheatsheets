@@ -661,6 +661,8 @@ https://github.com/IceWreck/LokiBoard-Android-Keylogger
 
 #### Vulnerabilities Checklist
 
+```
+
 [Android] Local Authentication Bypass
 [Android] Unencrypted User Keys
 [Android] Minimum SDK Version Not Enforced / Lower than Recommended
@@ -737,6 +739,10 @@ https://github.com/IceWreck/LokiBoard-Android-Keylogger
 [iOS] Broken App Sandbox - Check for sandbox escapes
 [iOS] NSUserDefaults for Sensitive Data - Should use Keychain instead
 [iOS] Insecure Touch ID/Face ID Implementation - Check LAContext usage
+
+```
+
+
 
 #### Web3 Wallets App
 
