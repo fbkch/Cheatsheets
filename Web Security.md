@@ -11,6 +11,7 @@
 
 (-sslcan / ssl labs / testssl.sh)
 -dirbuster (or dirb)
+-gobuster
 -burp intruder (github list bruteforce) (with authentication cookie)
 -sqlmap
 -check js client code
@@ -197,4 +198,22 @@ COPY, DELETE, GET, HEAD, LOCK, MOVE, OPTIONS, POST, PROPFIND, PROPPATCH, PUT, RE
 	List password hashes	->	SELECT name, password, astatus FROM sys.user$;
 
 	Comments 	-> 		--
+```
+
+
+#### Gobuster
+
+```
+gobuster dir -u https://test.test/ \
+
+  -w SecLists/Discovery/Web-Content/common.txt \
+
+  -t 1 \
+
+  --delay 2s \
+
+  --timeout 30s \
+
+  -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
 ```

