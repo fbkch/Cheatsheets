@@ -30,6 +30,13 @@ apktool d myapp.apk -o extractedFolder
 #### Extract APK
 
 ```
+1. Use App Inspector to locate the package name of the app
+2. Run:   adb shell pm path com.myapp.test
+3. Run:   adb pull /data/app/blabla/blabla.apk    (for each apk)
+4. Analyse each apk, create dir and extract in each dir:    mkdir -p myapp_analysis/{base,arm64,en,xxhdpi}
+
+
+Links
 - https://www.alphr.com/extract-apk-android/
 - https://apps.evozi.com/apk-downloader/?id=
 ```
@@ -202,6 +209,11 @@ drozer console connect --server 127.0.0.1:31415
 ```
 
 
+#### Android Non-Rooted Device
+
+* Use Genymotion (free license)
+	* Example device: Google Pixel 7a, on the right panel install Open GApps (for PlayStore)
+
 ---
 ## iOS
 
@@ -217,7 +229,7 @@ drozer console connect --server 127.0.0.1:31415
 	-> find /private/var/containers/Bundle/Application/ -name "*.app" | grep -i "MyAppName"
 
 -> extract bundle folder (/private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX)
-	-> scp -r -P 2222 mobile@192.168.1.X:"/private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX/My App.app" .
+	-> scp -r -P 2222 mobile@localhost:"/private/var/containers/Bundle/Application/XXXX-XXXX-XXX-XXXXX-XXXXXX/My App.app" .
 
 -> copy the entire extracted folder (XXXX.app) in a "Payload" named folder and zip it YourChoiceName.ipa
 	-> mkdir -p Payload
@@ -307,7 +319,7 @@ alpine
 
 	on MacOS
 		idevice_id --list
-		idevicesyslog -u <device_ID> 
+		idevicesyslog -u <device_ID>  | grep -i "com.myapp.test"
 ```
 
 #### Jailbreak iOS 13
@@ -473,9 +485,11 @@ objection -g 1983 explore
 import aes-hook.js
 ```
 
-#### Objection dumping memory
+#### Objection search & dumping memory
 
 ```
+ memory search --string "token"
+
 memory dump all dump.txt
 strings dump.txt > strings.txt 
 ```
@@ -881,6 +895,8 @@ adb logcat | grep -i "intent\|activity"
 aapt dump badging my_test.apk | grep "sdkVersion"
 
 ```
+#### Android v1/v2/v3 signatures check
+* Use https://github.com/fbkch/Cheatsheets/blob/master/Scripts/analyze_apk_signature.sh
 
 #### iproxy & SSH port forwarding
 
@@ -895,9 +911,22 @@ BURPSUITE
 	On Mac (for iOS)
 	First Shell -> iproxy 2222 22
 	Second Shell -> ssh -R 8080:localhost:9082 mobile@localhost -p 2222
+	Third Shell if needed:
+		-> ssh mobile@localhost -p 2222
+		-> sudo su
+		-> killall frida-server
+		-> frida-server   (make sure to be root !)
+		On Host: -> frida-ps -Ua
+				 -> objection -g myapp.com explore
 
 	On Mac (for Android)
 	First Shell -> adb reverse tcp:8080 tcp:9082
+				-> adb reverse --list
+	Second Shell if needed:
+		-> adb shell
+		-> su
+		-> cd /data/local/tmp
+		-> ./frida*
 	
 	-> Configure Proxy Listener on the Device:
 		- Go to "Proxy" > "Options"
@@ -905,5 +934,30 @@ BURPSUITE
 
 	-> Configure BurpSuite Proxy:
 		- Listen on 127.0.0.1:9082
+
+```
+
+
+#### iOS plist file
+
+```
+plutil -convert xml1 com.myapp.plist -o -
+
+```
+
+Check for `NSAllowsArbitraryLoads` within the `Info.plist`:
+*  plutil -p myapp/Info.plist | grep -A 1 "NSAllowsArbitraryLoads"
+
+
+### File Sharing on Public Network
+```
+Terminal 1:
+	python3 -m http.server 9000 --bind 127.0.0.1
+
+Terminal 2:
+	 iproxy 2222 22
+
+Terminal 3:
+	ssh -R 9000:localhost:9000 mobile@localhost -p 2222
 
 ```
